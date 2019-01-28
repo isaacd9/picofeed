@@ -139,7 +139,11 @@ a:visited {color: #888;}
 			if i == 0 {
 				fmt.Fprintf(f, "<h4>%s</h4>\n", p.Timestamp.Format(dateFormat))
 			}
-			fmt.Fprintf(f, "<div><a href=\"%s\">%s</a> (%s)</div>\n", p.Link, p.Title, p.shortFeedLink())
+			fmt.Fprintf(
+				f,
+				"<div><b>%s</b>\t<a href=\"%s\" target=blank>%s</a> (%s)</div>\n",
+				p.Timestamp.Format("Jan 2"), p.Link, p.Title, p.shortFeedLink(),
+			)
 		}
 	}
 
