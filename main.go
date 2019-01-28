@@ -133,17 +133,23 @@ a:visited {color: #888;}
 `)
 
 	grouped := groupByDate(posts, dateFormat)
+	var lastTimestamp string
 
 	for _, group := range grouped {
 		for i, p := range group {
+			timestamp := p.Timestamp.Format("Jan 2")
 			if i == 0 {
 				fmt.Fprintf(f, "<h4>%s</h4>\n", p.Timestamp.Format(dateFormat))
+			} else if timestamp != lastTimestamp {
+				fmt.Fprintf(f, "<br />")
 			}
+
 			fmt.Fprintf(
 				f,
 				"<div><b>%s</b>\t<a href=\"%s\" target=blank>%s</a> (%s)</div>\n",
-				p.Timestamp.Format("Jan 2"), p.Link, p.Title, p.shortFeedLink(),
+				timestamp, p.Link, p.Title, p.shortFeedLink(),
 			)
+			lastTimestamp = timestamp
 		}
 	}
 
